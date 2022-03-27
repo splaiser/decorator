@@ -1,7 +1,9 @@
-from main import logger
+from main import parametrized_decor
 
 import requests
 from pprint import pprint
+
+path = "D:/Python/Netology/Prof_python/decorator/log.txt"   # Указать путь к расположению Лога
 
 superhero_names = ["Hulk", "Captain America", "Thanos"]
 superhero_list = []
@@ -9,7 +11,7 @@ TOKEN = '2619421814940190'
 url = f'https://superheroapi.com/api/{TOKEN}/'
 
 
-@logger
+@parametrized_decor(parameter=path)
 def search_hero():
     for name in superhero_names:
         search_url = f'https://superheroapi.com/api/{TOKEN}/search/{name}'
@@ -22,7 +24,7 @@ def search_hero():
                         superhero_list.append({'id': items['id']})
 
 
-@logger
+@parametrized_decor(parameter=path)
 def smartest_hero():
     search_hero()
     hero_stats = []
@@ -40,7 +42,7 @@ def smartest_hero():
 print(smartest_hero())
 
 
-@logger
+@parametrized_decor(parameter=path)
 def summ(a, b):
     return a + b
 
